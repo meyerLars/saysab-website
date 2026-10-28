@@ -4,22 +4,24 @@
 
 ```bash
 cd ~/Projekte/saysab-website
-python3 -m http.server 8000
+npm install      # einmalig
+npm run dev
 ```
 
-Dann im Browser öffnen: http://localhost:8000
+Dann im Browser öffnen: http://localhost:5173
 Beenden mit `Ctrl+C` im Terminal.
 
-## Git
+## Build
 
 ```bash
-git init
-git add .
-git commit -m "Grundgerüst"
+npm run build    # erzeugt dist/
+npm run preview  # dist/ lokal ansehen
 ```
 
 ## Dateien
 
-- `index.html` Seitenstruktur
-- `style.css` Aussehen (Farben als Variablen oben, Dark Mode automatisch)
-- `app.js` Verhalten im Browser
+- `src/lib/catalog.ts` Preise, Tiere, Farben, Abos, Kontakt
+- `src/components/` Seitenbereiche (Hero, Lineup, Pricing, Preorder, Contact …)
+- `src/components/ui/` shadcn/ui-Komponenten
+- `src/index.css` Markenfarben und Schrift
+- `public/img/` Produktbilder

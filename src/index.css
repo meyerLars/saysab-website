@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/bricolage-grotesque/opsz.css";
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+    --color-navy: var(--navy);
+    --color-pink: var(--pink);
+    --color-pink-soft: var(--pink-soft);
+    --color-cream: var(--cream);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    --navy: #13203c;
+    --pink: #e8336c;
+    --pink-soft: #fadde5;
+    --cream: #f6f5ef;
+
+    --background: var(--cream);
+    --foreground: var(--navy);
+    --card: #ffffff;
+    --card-foreground: var(--navy);
+    --popover: #ffffff;
+    --popover-foreground: var(--navy);
+    --primary: var(--navy);
+    --primary-foreground: var(--cream);
+    --secondary: #ebe9e1;
+    --secondary-foreground: var(--navy);
+    --muted: #ebe9e1;
+    --muted-foreground: #5a6378;
+    --accent: var(--pink-soft);
+    --accent-foreground: var(--navy);
+    --destructive: #c62a2a;
+    --border: #d9d6cc;
+    --input: #cfccc1;
+    --ring: var(--pink);
+    --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  ::selection {
+    background: var(--pink);
+    color: var(--cream);
+  }
+}
