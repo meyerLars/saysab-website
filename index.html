@@ -8,14 +8,174 @@
 </head>
 <body>
   <header class="site-header">
-    <span class="logo">saysab</span>
+    <a class="logo" href="#top">saysab</a>
+    <nav>
+      <a href="#produkte">Produkte</a>
+      <a href="#software">Software</a>
+      <a href="#preisliste">Preisliste</a>
+      <a href="#vorbestellen" class="nav-cta">Vorbestellen</a>
+    </nav>
   </header>
 
-  <main>
-    <h1>Hier entsteht die Website.</h1>
-    <p>Wenn du diese Seite siehst, läuft dein lokaler Server.</p>
-    <button id="test-button" type="button">Klick-Test: <span id="count">0</span></button>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Service-Roboter mit Charakter</p>
+        <h1>Freundliche Roboter für Empfang, Büro und Events.</h1>
+        <p>Wähle dein Tier, gib ihm deine Farbe und kombiniere es mit dem passenden Software-Abo.</p>
+        <p class="badge">Service inklusive: Lieferung, Einrichtung, Wartung und Support</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#produkte">Produkte ansehen</a>
+          <a class="button" href="#vorbestellen">Jetzt vorbestellen</a>
+        </div>
+      </div>
+      <img class="hero-img" src="img/pinguin.jpg" alt="saysab Pinguin-Roboter">
+    </section>
+
+    <section id="produkte">
+      <h2>Produkte</h2>
+      <p class="lead">Jedes Tier gibt es als <strong>Basic</strong> in Originalfarbe oder <strong>personalisiert</strong> in deiner Wunschfarbe. Klick auf ein Tier für Details.</p>
+
+      <div class="variants">
+        <article class="variant">
+          <h3>Basic</h3>
+          <p>Originalfarbe, sofort einsatzbereit.</p>
+          <p class="price" data-price="basic"></p>
+          <p class="price-sub" data-price="basic-bulk"></p>
+        </article>
+        <article class="variant">
+          <h3>Personalisiert</h3>
+          <p>Eine von 8 Farben nach Wahl.</p>
+          <p class="price" data-price="personal"></p>
+          <p class="price-sub" data-price="personal-bulk"></p>
+        </article>
+      </div>
+
+      <div class="animal-grid" id="animal-grid"></div>
+    </section>
+
+    <section id="software">
+      <h2>Software-Abos</h2>
+      <p class="lead">Die Software bestimmt, was dein Roboter kann. Preise gelten pro Roboter und Monat.</p>
+
+      <div class="billing-toggle" role="radiogroup" aria-label="Vertragslaufzeit">
+        <button type="button" role="radio" data-billing="monthly" aria-checked="true">Monatlich</button>
+        <button type="button" role="radio" data-billing="yearly" aria-checked="false">Jährlich <span class="save">spare 20 %</span></button>
+      </div>
+
+      <div class="plans" id="plans"></div>
+    </section>
+
+    <section id="preisliste">
+      <h2>Preisliste</h2>
+      <p class="badge">Bei jedem Kauf ist der Service inklusive: Lieferung, Einrichtung vor Ort, Wartung, Reparatur und Support.</p>
+
+      <h3>Roboter (einmalig, pro Stück)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Ausführung</th><th>1–99 Stück</th><th>ab 100 Stück</th><th>Service</th></tr>
+          </thead>
+          <tbody id="product-table"></tbody>
+        </table>
+      </div>
+
+      <h3>Software (pro Roboter und Monat)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Abo</th><th>Monatlich kündbar</th><th>Jahresvertrag</th></tr>
+          </thead>
+          <tbody id="plan-table"></tbody>
+        </table>
+      </div>
+      <p class="note">Alle Preise netto zzgl. MwSt. Demo-Preise.</p>
+    </section>
+
+    <section id="vorbestellen">
+      <h2>Vorbestellen</h2>
+      <p class="lead">Stell dir deine Bestellung zusammen. Das ist eine Demo, es werden keine Daten gesendet.</p>
+
+      <div class="order">
+        <form id="order-form">
+          <fieldset>
+            <legend>Roboter</legend>
+            <label>Tier
+              <select name="animal" id="order-animal"></select>
+            </label>
+            <div class="radio-row">
+              <label><input type="radio" name="variant" value="basic" checked> Basic</label>
+              <label><input type="radio" name="variant" value="personal"> Personalisiert</label>
+            </div>
+            <div class="swatches" id="order-swatches" aria-label="Farbe"></div>
+            <label>Anzahl
+              <input type="number" name="quantity" min="1" max="9999" value="1" required>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Software</legend>
+            <label>Abo
+              <select name="plan" id="order-plan"></select>
+            </label>
+            <div class="radio-row">
+              <label><input type="radio" name="billing" value="monthly" checked> Monatlich</label>
+              <label><input type="radio" name="billing" value="yearly"> Jährlich</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Kontakt</legend>
+            <label>Name <input type="text" name="name" required autocomplete="name"></label>
+            <label>Firma <input type="text" name="company" autocomplete="organization"></label>
+            <label>E-Mail <input type="email" name="email" required autocomplete="email"></label>
+          </fieldset>
+
+          <button type="submit" class="button primary">Verbindlich vorbestellen (Demo)</button>
+        </form>
+
+        <aside class="summary">
+          <div class="robot robot-small" id="order-preview">
+            <img src="" alt="">
+          </div>
+          <dl id="order-summary"></dl>
+          <p class="badge small">Service inklusive</p>
+        </aside>
+      </div>
+
+      <div class="confirmation" id="confirmation" hidden>
+        <h3>Danke für deine Vorbestellung!</h3>
+        <p id="confirmation-text"></p>
+        <button type="button" class="button" id="new-order">Neue Bestellung</button>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <p>saysab ist eine fiktive Firma. Diese Seite ist eine Demo.</p>
+  </footer>
+
+  <dialog id="product-dialog">
+    <form method="dialog" class="dialog-close"><button aria-label="Schließen">×</button></form>
+    <div class="dialog-body">
+      <div class="robot" id="dialog-robot">
+        <img src="" alt="">
+      </div>
+      <div>
+        <h3 id="dialog-title"></h3>
+        <p id="dialog-text"></p>
+        <div class="radio-row">
+          <label><input type="radio" name="dialog-variant" value="basic" checked> Basic</label>
+          <label><input type="radio" name="dialog-variant" value="personal"> Personalisiert</label>
+        </div>
+        <div class="swatches" id="dialog-swatches" aria-label="Farbe"></div>
+        <p class="price" id="dialog-price"></p>
+        <p class="price-sub" id="dialog-price-bulk"></p>
+        <p class="badge small">Service inklusive</p>
+        <button type="button" class="button primary" id="dialog-order">Dieses Modell vorbestellen</button>
+      </div>
+    </div>
+  </dialog>
 
   <script src="app.js"></script>
 </body>
