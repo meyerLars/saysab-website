@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import {
   ANIMALS,
+  BASE_ANIMAL,
   BULK_FROM,
   CONTACT,
   PLANS,
@@ -51,7 +52,7 @@ function Step({ n, title, children }: { n: string; title: string; children: Reac
 export function Preorder({ order, onChange }: { order: Order; onChange: (o: Partial<Order>) => void }) {
   const [sent, setSent] = useState<{ name: string; email: string } | null>(null)
 
-  const unit = unitPrice(order.quantity, order.color)
+  const unit = unitPrice(order.quantity, order.animal, order.color)
   const hardware = unit * order.quantity
   const plan = findPlan(order.plan)
   const software = (order.billing === "yearly" ? plan.yearly : plan.monthly) * order.quantity
@@ -149,6 +150,11 @@ export function Preorder({ order, onChange }: { order: Order; onChange: (o: Part
                     )
                   })}
                 </div>
+                <p className="-mt-2 text-sm text-muted-foreground">
+                  {order.animal === BASE_ANIMAL
+                    ? "Bear is the base product"
+                    : `Alternative animal · + ${formatEur(PRICES.alternativeAnimal)} per unit`}
+                </p>
 
                 <div>
                   <p className="mb-3 text-sm text-muted-foreground">

@@ -11,7 +11,7 @@ import { CONTACT } from "@/lib/catalog"
 
 export default function App() {
   const [order, setOrder] = useState<Order>({
-    animal: "penguin",
+    animal: "bear",
     color: "original",
     quantity: 1,
     plan: "translate",

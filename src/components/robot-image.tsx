@@ -27,6 +27,7 @@ export function RobotImage({
           src={a.image}
           alt={`${a.name} robot in ${c.name}`}
           className={cn("size-full object-cover", imgClassName)}
+          style={imgClassName ? undefined : { objectPosition: a.focus }}
           initial={{ opacity: 0, scale: 1.08, x: 60 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           exit={{ opacity: 0, scale: 0.96, x: -60 }}

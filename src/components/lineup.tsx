@@ -2,7 +2,18 @@ import { AnimatePresence, motion } from "framer-motion"
 import { cn } from "cn"
 import { RobotImage } from "@/components/robot-image"
 import { ColorSwatches } from "@/components/color-swatches"
-import { ANIMALS, PRICES, findAnimal, findColor, formatEur, type AnimalId, type ColorId } from "@/lib/catalog"
+import { AnimatedPrice } from "@/components/animated-price"
+import {
+  ANIMALS,
+  BASE_ANIMAL,
+  PRICES,
+  findAnimal,
+  findColor,
+  formatEur,
+  surcharges,
+  type AnimalId,
+  type ColorId,
+} from "@/lib/catalog"
 import { press, revealProps, spring } from "@/lib/motion"
 
 export function Lineup({
@@ -19,7 +30,10 @@ export function Lineup({
   onOrder: () => void
 }) {
   const active = findAnimal(animal)
-  const modified = color !== "original"
+  const extras = [
+    animal !== BASE_ANIMAL && `alternative animal + ${formatEur(PRICES.alternativeAnimal)}`,
+    color !== "original" && `colour + ${formatEur(PRICES.modification)}`,
+  ].filter(Boolean)
 
   return (
     <section id="lineup" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-36">
@@ -97,21 +111,21 @@ export function Lineup({
 
           <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-4xl font-bold tabular-nums">
-                {formatEur(PRICES.unit + (modified ? PRICES.modification : 0))}
-              </p>
-              <AnimatePresence initial={false}>
-                {modified && (
-                  <motion.p
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={spring}
-                    className="overflow-hidden text-sm text-muted-foreground"
-                  >
-                    incl. colour modification + {formatEur(PRICES.modification)}
-                  </motion.p>
-                )}
+              <AnimatedPrice
+                value={PRICES.unit + surcharges(animal, color)}
+                className="block text-4xl font-bold tabular-nums"
+              />
+              <AnimatePresence initial={false} mode="popLayout">
+                <motion.p
+                  key={extras.join() || "base"}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={spring}
+                  className="text-sm text-muted-foreground"
+                >
+                  {extras.length ? `incl. ${extras.join(" · ")}` : "Base product"}
+                </motion.p>
               </AnimatePresence>
               <p className="text-sm font-semibold text-pink">Service included</p>
             </div>

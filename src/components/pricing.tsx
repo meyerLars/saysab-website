@@ -53,7 +53,7 @@ export function Pricing({ billing, onBilling }: { billing: Billing; onBilling: (
 
         <div className="md:col-span-7 md:col-start-6">
           <Heading n={1}>Product</Heading>
-          <Row title="Robot" sub={`Penguin, Owl, Elephant or Hippo · charged via cable · 1–${BULK_FROM - 1} units`}>
+          <Row title="Base product · Bear" sub={`Charged via cable · 1–${BULK_FROM - 1} units`}>
             {formatEur(PRICES.unit)}
           </Row>
           <Row title="Volume price" sub={`Per unit from ${BULK_FROM} units`}>
@@ -65,7 +65,10 @@ export function Pricing({ billing, onBilling }: { billing: Billing; onBilling: (
           </Row>
 
           <Heading n={2}>Personalization</Heading>
-          <Row title="Colour modification" sub="Each change from the original colour">
+          <Row title="Alternative animal" sub="Choose from Elephant, Hippo, Penguin or Owl">
+            + {formatEur(PRICES.alternativeAnimal)}
+          </Row>
+          <Row title="Additional modification" sub="Each further change, e.g. a different colour">
             + {formatEur(PRICES.modification)}
           </Row>
 

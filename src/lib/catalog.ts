@@ -3,12 +3,16 @@ export const BULK_FROM = 100
 export const PRICES = {
   unit: 449.99,
   bulkUnit: 399.0,
+  alternativeAnimal: 99.99,
   modification: 49.99,
 }
 
-export type AnimalId = "penguin" | "owl" | "elephant" | "hippo"
+export type AnimalId = "bear" | "penguin" | "owl" | "elephant" | "hippo"
 
-export const ANIMALS: { id: AnimalId; name: string; image: string; line: string }[] = [
+export const BASE_ANIMAL: AnimalId = "bear"
+
+export const ANIMALS: { id: AnimalId; name: string; image: string; line: string; focus?: string }[] = [
+  { id: "bear", name: "Bear", image: "img/baer.jpg", line: "The original. Friendly, steady and ready for any front desk.", focus: "50% 12%" },
   { id: "penguin", name: "Penguin", image: "img/pinguin.jpg", line: "Calm and upright. Made for front desks and lobbies." },
   { id: "owl", name: "Owl", image: "img/eule.jpg", line: "Wide eyes, quiet wheels. At home in libraries and info points." },
   { id: "elephant", name: "Elephant", image: "img/elefant.jpg", line: "Big ears, gentle voice. Built for clinics and waiting rooms." },
@@ -48,9 +52,13 @@ export const CONTACT = {
 const eur = new Intl.NumberFormat("en-IE", { style: "currency", currency: "EUR" })
 export const formatEur = (value: number) => eur.format(value)
 
-export function unitPrice(quantity: number, color: ColorId) {
+export function surcharges(animal: AnimalId, color: ColorId) {
+  return (animal === BASE_ANIMAL ? 0 : PRICES.alternativeAnimal) + (color === "original" ? 0 : PRICES.modification)
+}
+
+export function unitPrice(quantity: number, animal: AnimalId, color: ColorId) {
   const base = quantity >= BULK_FROM ? PRICES.bulkUnit : PRICES.unit
-  return base + (color === "original" ? 0 : PRICES.modification)
+  return base + surcharges(animal, color)
 }
 
 export function findAnimal(id: AnimalId) {
